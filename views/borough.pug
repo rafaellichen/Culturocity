@@ -26,5 +26,19 @@
                 for val in AllBorough
                     a(href="/borough/"+val.NAME class="btn btn-primary") #{val.NAME}
             </div>
+        if BoroughSearchResult
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr><th>Name</th></tr>
+                    </thead>
+                    <tbody>
+                        for val in final
+                            <tr>
+                                td= val.NAME
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
     </body>
 </html>
