@@ -11,7 +11,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">All Museums</a></li>
                     <li><a href="/borough">Museums By Borough</a></li>
-                    <li><a href="/name">Search By Name</a></li>
+                    </li><li><a href="/name">Search By Name</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -19,20 +20,11 @@
                 </ul>
             </div>
         </nav>
-        <h1>All Museums</h1>
-        if AllResult
-            <div class="container">
-                <table class="table table-striped">
-                    <thead>
-                        <tr><th>Name</th></tr>
-                    </thead>
-                    <tbody>
-                        for val in AllMuseums
-                            <tr>
-                                td= val.NAME
-                            </tr>
-                    </tbody>
-                </table>
+        <h1>Museums By Borough</h1>
+        if BoroughResult 
+            <div class="btn-group btn-group-justified"> 
+                for val in AllBorough
+                    a(href="/borough/"+val.NAME class="btn btn-primary") #{val.NAME}
             </div>
     </body>
 </html>

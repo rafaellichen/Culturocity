@@ -11,7 +11,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">All Museums</a></li>
                     <li><a href="/borough">Museums By Borough</a></li>
-                    <li><a href="/name">Search By Name</a></li>
+                    </li><li><a href="/name">Search By Name</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -19,15 +20,21 @@
                 </ul>
             </div>
         </nav>
-        <h1>All Museums</h1>
-        if AllResult
+        <h1>Museums By Name</h1>
+        <div class="navbar-form navbar-left">
+            <div class="form-group">
+                <input id="input" type="text" class="form-control" placeholder="Search">
+            </div>
+            <button onClick='window.location.href="/name/"+document.getElementById("input").value'; class="btn btn-default">Submit</button>
+        </div>
+        if NameResult
             <div class="container">
                 <table class="table table-striped">
                     <thead>
                         <tr><th>Name</th></tr>
                     </thead>
                     <tbody>
-                        for val in AllMuseums
+                        for val in AllName
                             <tr>
                                 td= val.NAME
                             </tr>
