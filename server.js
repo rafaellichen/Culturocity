@@ -4,9 +4,8 @@ const app	= express();
 const sqlite3 = require("sqlite3").verbose()
 const db = new sqlite3.Database("culturocity.db")
 
-app.set('views', __dirname + '/views');
 app.set('view engine', 'pug')
-app.engine('html', require('ejs').renderFile);
+app.use(express.static(__dirname + '/views'));
 
 app.use(bodyParser.json());      
 app.use(bodyParser.urlencoded({extended: true}));
