@@ -65,7 +65,7 @@ app.get('/borough/:str',function(req,res){
 				if(bk.includes(Number(element.ZIP)))
 					final.push(element)
 			if(BoroughName == "Bronx")
-				if(qn.includes(Number(element.ZIP)))
+				if(bx.includes(Number(element.ZIP)))
 					final.push(element)
 		});
 		res.render('borough', {BoroughSearch: final, BoroughSearchResult: temp});
