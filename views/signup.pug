@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>Culturocity</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        link(rel="stylesheet", href="card.css")
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -20,21 +19,17 @@
                 </ul>
             </div>
         </nav>
-        <h1>All Museums</h1>
-        <div class="container">
-            <div class="flex-row row">
-                if AllResult
-                    for val in AllMuseums
-                        <div class="col-xs-6 col-sm-4 col-lg-4">
-                            <div class="thumbnail">
-                                <img src="http://papers.co/wallpaper/papers.co-bd96-spaceship-art-illustration-32-wallpaper.jpg">
-                                <div class="caption">
-                                    <h3>#{val.NAME}</h2>
-                                    <p><a class="btn btn-primary" href="#">Link</a></p>
-                                </div>
-                            </div>
-                        </div>
-            </div>
+        <h1>Sign Up</h1>
+        <div class="form-group">
+            <label for="usr">Username:</label>
+            <input type="text" class="form-control" id="usr">
         </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+        <button onClick='signup()'; class="btn btn-default">Submit</button>
+        script
+            include script.js
     </body>
 </html>

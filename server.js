@@ -2,13 +2,11 @@ const express	= require('express');
 const bodyParser = require('body-parser');
 const app	= express();
 const sqlite3 = require("sqlite3").verbose()
+const md5 = require('js-md5');
 const db = new sqlite3.Database("culturocity.db")
 
 app.set('view engine', 'pug')
 app.use(express.static(__dirname + '/views'));
-
-app.use(bodyParser.json());      
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/',function(req,res){
 	db.all('SELECT * FROM museums', function(err, ans) {
@@ -20,6 +18,59 @@ app.get('/',function(req,res){
 
 app.get('/name',function(req,res){
 	res.render('name');
+});
+
+app.get('/signup',function(req,res){
+	res.render('signup');
+});
+
+app.get('/signup/:username/:password', function(req,res) {
+	username = req.params.username
+	password = req.params.password
+	db.all("SELECT username FROM users", function(err, data) {
+		var duplicate = false;
+		for(var i=0; i<data.length; i++) {
+			if(data[i].username==username) {
+				duplicate = true;
+				break;
+		  	}
+		}
+		if(!duplicate) {
+		  	const str2md5 = md5(password)
+		  	const sql = "INSERT INTO users (username,password_digest) VALUES (?)"
+		  	db.run(sql.replace("?",'"'+username+'","'+str2md5+'"'),function(err) {});
+		}
+		if(duplicate) {
+			res.send({Message: "Username Already Exist", val: false})
+		} else {
+			res.send({Message: "Registration Successful", val: true})
+		}
+	})
+});
+
+app.get('/login/:username/:password', function(req,res) {
+	username = req.params.username
+	password = req.params.password
+	const sql = "SELECT username,password_digest FROM users WHERE username=?"
+  	db.all(sql.replace("?",'"'+username+'"'),function(err, data) {
+		if(err) {
+			console.log("ERROR!")
+		} else {
+			if(data.length) {
+				const str2md5 = md5(password)
+				if(str2md5===data[0].password_digest) {
+					res.send({message: "LogIn Successful", username: data[0].username, password: data[0].password_digest.slice(0,11), val: true})
+				}
+			} else {
+				res.send({message: "Username or Password is incorrect", val: false})
+			}
+			console.log("DONE!")
+		}
+  	});
+});
+
+app.get('/login',function(req,res){
+	res.render('login');
 });
 
 app.get('/borough',function(req,res){
