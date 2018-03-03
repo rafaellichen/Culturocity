@@ -33,7 +33,6 @@ app.get('/borough',function(req,res){
 
 app.get('/name/:str',function(req,res){
 	searchName = req.params.str
-	console.log("SELECT * FROM museums WHERE name LIKE "+'"'+"%"+searchName+"%"+'"')
 	db.all("SELECT * FROM museums WHERE NAME LIKE "+'"'+"%"+searchName+"%"+'"', function(err, ans) {
 		if(ans) temp=true
 		else temp=false
@@ -69,7 +68,6 @@ app.get('/borough/:str',function(req,res){
 				if(qn.includes(Number(element.ZIP)))
 					final.push(element)
 		});
-		console.log(final.length)
 		res.render('borough', {BoroughSearch: final, BoroughSearchResult: temp});
 	})
 });
