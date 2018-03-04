@@ -33,3 +33,11 @@
     width: 33px;
     margin-right: 11px;
 }
+h1 {
+    text-align: center;
+}
+.center {
+    margin: auto;
+    text-align: center;
+    width: 25%;
+}
