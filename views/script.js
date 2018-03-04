@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch("/liked/"+localStorage.getItem("SignedUser"))
         .then(response => response.json())
         .then(obj => {
-            obj = obj.filter(function(element) {
+            obj.temp = obj.temp.filter(function(element) {
                 return element!=""
             })
             obj.temp.forEach(element => {
