@@ -85,7 +85,11 @@ app.get('/like/:name/:id',function(req,res) {
 app.get('/liked/:name',function(req,res) {
 	username = req.params.name
 	db.all('SELECT liked from users WHERE username="'+username+'"', function(err, ans) {
-		temp = ans[0].liked.split(".")
+		if(ans[0].liked==null) {
+			temp = []
+		} else {
+			temp = ans[0].liked.split(".")
+		}
 		res.send({temp})
 	})
 })
@@ -107,7 +111,11 @@ app.get('/profile/:name',function(req,res) {
 	username = req.params.name
 	const sql = "SELECT * FROM users WHERE username=?"
   	db.all(sql.replace("?",'"'+username+'"'),function(err, data) {
-		liked = data[0].liked.split(".")
+		if(data[0].liked==null) {
+			liked = []
+		} else {
+			liked = data[0].liked.split(".")
+		}
 		db.all('SELECT * FROM museums', function(err, ans) {
 			final = []
 			ans.forEach(function(element) {
