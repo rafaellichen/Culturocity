@@ -90,3 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>'
     }
 });
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});

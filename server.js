@@ -1,6 +1,6 @@
 const express	= require('express');
 const bodyParser = require('body-parser');
-const app	= express();
+const app = express();
 const sqlite3 = require("sqlite3").verbose();
 const md5 = require('js-md5');
 const db = new sqlite3.Database("culturocity.db")
