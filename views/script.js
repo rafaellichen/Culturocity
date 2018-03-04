@@ -77,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch("/liked/"+localStorage.getItem("SignedUser"))
         .then(response => response.json())
         .then(obj => {
-            console.log(obj)
+            obj = obj.filter(function(element) {
+                return element!=""
+            })
             obj.temp.forEach(element => {
                 document.querySelector('button[value="'+element+'"]').classList.add("btn-danger")
                 document.querySelector('button[value="'+element+'"]').classList.remove("btn-success")
