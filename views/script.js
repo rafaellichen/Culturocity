@@ -77,15 +77,16 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch("/liked/"+localStorage.getItem("SignedUser"))
         .then(response => response.json())
         .then(obj => {
-            console.log(obj)
             obj.temp = obj.temp.filter(function(element) {
                 return element!=""
             })
             obj.temp.forEach(element => {
-                document.querySelector('button[value="'+element+'"]').classList.add("btn-danger")
-                document.querySelector('button[value="'+element+'"]').classList.remove("btn-success")
-                document.querySelector('button[value="'+element+'"]').innerHTML = "Unlike"
-                document.querySelector('button[value="'+element+'"]').setAttribute('onclick','unlike(this)')
+                if(document.querySelector('button[value="'+element+'"]')!=null) {
+                    document.querySelector('button[value="'+element+'"]').classList.add("btn-danger")
+                    document.querySelector('button[value="'+element+'"]').classList.remove("btn-success")
+                    document.querySelector('button[value="'+element+'"]').innerHTML = "Unlike"
+                    document.querySelector('button[value="'+element+'"]').setAttribute('onclick','unlike(this)')
+                }
             });
         })
     } else {
