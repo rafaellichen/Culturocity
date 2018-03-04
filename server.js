@@ -33,15 +33,16 @@ app.get('/',function(req,res) {
 				});
 			}
 			final = final.byCount().slice(0,5)
-			ans = ans.filter(function(element) {
-				return final.includes(element.ID)
+			result = []
+			final.forEach(function(e) {
+				ans.forEach(function(element) {
+					if(element.ID==e) result.push(element)
+				})
 			})
-			if(ans) temp=true;
+			if(result) temp=true;
 			else temp=false;
-			console.log(ans)
-			res.render('front', {Popular: ans, PopularResult: temp});
-		})
-		
+			res.render('front', {Popular: result, PopularResult: temp});
+		})	
 	})
 })
 
@@ -140,7 +141,7 @@ app.get('/unlike/:name/:id',function(req,res) {
 		temp = temp.filter(function(element) {
 			return element != cid
 		})
-		db.all('UPDATE users SET liked="'+temp.join(".")+'"')
+		db.all('UPDATE users SET liked="'+temp.join(".")+'" WHERE username="'+username+'"')
 		res.send({val: true})
 	})
 });
