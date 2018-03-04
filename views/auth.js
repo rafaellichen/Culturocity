@@ -1,5 +1,5 @@
 function signup() {
-    fetch("http://localhost:3000/signup/"+document.getElementById("usr").value+"/"+document.getElementById("pwd").value)
+    fetch("/signup/"+document.getElementById("usr").value+"/"+document.getElementById("pwd").value)
     .then(response => response.json())
     .then(obj => {
         if(obj.val) {
@@ -15,7 +15,7 @@ function signup() {
 }
 
 function login() {
-    fetch("http://localhost:3000/login/"+document.getElementById("usr").value+"/"+document.getElementById("pwd").value)
+    fetch("/login/"+document.getElementById("usr").value+"/"+document.getElementById("pwd").value)
     .then(response => response.json())
     .then(obj => {
         if(obj.val) {
@@ -37,7 +37,7 @@ function logOut() {
 
 function like(cur) {
     if(localStorage.getItem("SignedIn")=="true") {
-        fetch("http://localhost:3000/like/"+localStorage.getItem("SignedUser")+"/"+cur.value)
+        fetch("/like/"+localStorage.getItem("SignedUser")+"/"+cur.value)
         .then(response => response.json())
         .then(obj => {
             if(obj.val) {
@@ -54,7 +54,7 @@ function like(cur) {
 
 function unlike(cur) {
     if(localStorage.getItem("SignedIn")=="true") {
-        fetch("http://localhost:3000/unlike/"+localStorage.getItem("SignedUser")+"/"+cur.value)
+        fetch("/unlike/"+localStorage.getItem("SignedUser")+"/"+cur.value)
         .then(response => response.json())
         .then(obj => {
             if(obj.val) {
