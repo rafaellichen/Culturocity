@@ -4,6 +4,7 @@ const app = express();
 const sqlite3 = require("sqlite3").verbose();
 const md5 = require('js-md5');
 const db = new sqlite3.Database("culturocity.db")
+const PORT = process.env.PORT || 3000
 
 app.set('view engine', 'pug')
 
@@ -221,7 +222,9 @@ app.get('/borough/:str',function(req,res){
 	})
 });
 
-app.listen(3000,function(){
-	console.log("App Started on PORT 3000");
-	console.log("http://localhost:3000")
-});
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+// app.listen(3000,function(){
+// 	console.log("App Started on PORT 3000");
+// 	console.log("http://localhost:3000")
+// });
