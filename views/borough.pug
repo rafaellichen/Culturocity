@@ -4,111 +4,29 @@
         <meta charset="UTF-8">
         <title>Culturocity</title>
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-        style(type="text/css").
-            .flex-row {
-                display: flex;
-                flex-wrap: wrap;
-            }
-            .flex-row > [class*='col-'] {
-                display: flex;
-                flex-direction: column;
-            }
-            .thumbnail {
-                display: flex;
-            }
-            .flex-row .thumbnail,
-            .flex-row .caption {
-                flex-direction: column;
-                display: flex;
-                flex: 1 0 auto;
-                height: auto;
-                position: relative;
-            }
-            .flex-text {
-                flex-grow: 1;
-            }
-            .flex-row img {
-                min-width: 0;
-                width: 100%;
-            }
-            .progress-bar-r-1 {
-                margin-left: 1px;
-            }
-            .progress-bar-r-3 {
-                margin-left: 3px;
-            }
+        <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+        style
+            include ../views/r.css
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">All Museums</a></li>
-                    <li><a href="/borough">Museums By Borough</a></li>
-                    <li><a href="/name">Search By Name</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-                </ul>
-            </div>
-        </nav>
+        include navbar.pug
         <h1>Museums By Borough</h1>
-        if BoroughResult 
-            <div class="btn-group btn-group-justified"> 
-                for val in AllBorough
-                    a(href="/borough/"+val.NAME class="btn btn-primary") #{val.NAME}
-            </div>
+        <div class="btn-group btn-group-justified"> 
+            a(href="/borough/Manhattan" class="btn btn-primary") Manhattan
+            a(href="/borough/Queens" class="btn btn-primary") Queens
+            a(href="/borough/Brooklyn" class="btn btn-primary") Brooklyn
+            a(href="/borough/Bronx" class="btn btn-primary") Bronx
+            a(href="/borough/Staten Island" class="btn btn-primary") Staten Island
+        </div>
+        br
         <div class="container">
             <div class="flex-row row">
                 if BoroughSearchResult
                     for val in final
-                        <div class="col-xs-6 col-sm-4 col-lg-4">
-                            <div class="thumbnail">
-                                <img src="http://papers.co/wallpaper/papers.co-bd96-spaceship-art-illustration-32-wallpaper.jpg">
-                                <div class="caption">
-                                    <h3>#{val.NAME}</h3>
-                                    <div class="progress">
-                                        if val.MON != "closed"
-                                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:14%">MON</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" style="width:14%">MON</div>
-                                        if val.TUE != "closed"
-                                            <div class="progress-bar progress-bar-success progress-bar-r-1" role="progressbar" style="width:14%">TUE</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger progress-bar-r-1" role="progressbar" style="width:14%">TUE</div>
-                                        if val.WED != "closed"
-                                            <div class="progress-bar progress-bar-success progress-bar-r-1" role="progressbar" style="width:14%">WED</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger progress-bar-r-1" role="progressbar" style="width:14%">WED</div>
-                                        if val.THUR != "closed"
-                                            <div class="progress-bar progress-bar-success progress-bar-r-1" role="progressbar" style="width:14%">THUR</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger progress-bar-r-1" role="progressbar" style="width:14%">THUR</div>
-                                        if val.FRI != "closed"
-                                            <div class="progress-bar progress-bar-success progress-bar-r-1" role="progressbar" style="width:14%">FRI</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger progress-bar-r-1" role="progressbar" style="width:14%">FRI</div>
-                                        if val.SAT != "closed"
-                                            <div class="progress-bar progress-bar-success progress-bar-r-3" role="progressbar" style="width:14%">SAT</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger progress-bar-r-3" role="progressbar" style="width:14%">SAT</div>
-                                        if val.SUN != "closed"
-                                            <div class="progress-bar progress-bar-success progress-bar-r-3" role="progressbar" style="width:13%">SUN</div>
-                                        else
-                                            <div class="progress-bar progress-bar-danger progress-bar-r-3" role="progressbar" style="width:13%">SUN</div>
-                                    </div>
-                                    p #{val.DESCRIP}
-                                    p #{val.TEL}
-                                    p #{val.ADRESS1}
-                                    p #{val.ZIP}
-                                    <p>
-                                        a(target="#blank" href=val.URL class="btn btn-primary") Link
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        include card.pug
             </div>
         </div>
+        script
+            include script.js
     </body>
 </html>

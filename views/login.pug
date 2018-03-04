@@ -6,28 +6,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">All Museums</a></li>
-                    <li><a href="/borough">Museums By Borough</a></li>
-                    <li><a href="/name">Search By Name</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-                </ul>
-            </div>
-        </nav>
+        include navbar.pug
         <h1>Log In</h1>
-        <div class="form-group">
-            <label for="usr">Username:</label>
-            <input type="text" class="form-control" id="usr">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
-        </div>
+        include usrpwd.pug
         <button onClick='login()'; class="btn btn-default">Submit</button>
         script
             include script.js
