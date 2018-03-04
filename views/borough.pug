@@ -3,42 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <title>Culturocity</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+        style
+            include ../views/r.css
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">All Museums</a></li>
-                    <li><a href="/borough">Museums By Borough</a></li>
-                    </li><li><a href="/name">Search By Name</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-                </ul>
-            </div>
-        </nav>
+        include navbar.pug
         <h1>Museums By Borough</h1>
-        if BoroughResult 
-            <div class="btn-group btn-group-justified"> 
-                for val in AllBorough
-                    a(href="/borough/"+val.NAME class="btn btn-primary") #{val.NAME}
+        <div class="btn-group btn-group-justified"> 
+            a(href="/borough/Manhattan" class="btn btn-primary") Manhattan
+            a(href="/borough/Queens" class="btn btn-primary") Queens
+            a(href="/borough/Brooklyn" class="btn btn-primary") Brooklyn
+            a(href="/borough/Bronx" class="btn btn-primary") Bronx
+            a(href="/borough/Staten Island" class="btn btn-primary") Staten Island
+        </div>
+        br
+        <div class="container">
+            <div class="flex-row row">
+                if BoroughSearchResult
+                    for val in final
+                        include card.pug
             </div>
-        if BoroughSearchResult
-            <div class="container">
-                <table class="table table-striped">
-                    <thead>
-                        <tr><th>Name</th></tr>
-                    </thead>
-                    <tbody>
-                        for val in final
-                            <tr>
-                                td= val.NAME
-                            </tr>
-                    </tbody>
-                </table>
-            </div>
+        </div>
+        script
+            include script.js
     </body>
 </html>
