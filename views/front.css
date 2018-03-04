@@ -1,0 +1,12 @@
+.carousel-indicators {
+    margin-bottom: 12%;
+}
+.carousel-caption {
+    margin-bottom: 15%;
+    background-color: rgba(105, 105, 105, 0.7);
+    border-radius: 25px;
+}
+.carousel-caption p {
+    margin-left: 50px;
+    margin-right: 50px;
+}

@@ -7,7 +7,45 @@ const db = new sqlite3.Database("culturocity.db")
 
 app.set('view engine', 'pug')
 
-app.get('/',function(req,res){
+app.get('/',function(req,res) {
+	db.all('SELECT * FROM museums', function(err, ans) {
+		db.all('SELECT liked FROM users', function(err, liked) {
+			liked = liked.filter(function(element) {
+				return element.liked!=null
+			})
+			final = []
+			liked.forEach(function(element) {
+				element.liked.split(".").forEach(function(e) {
+					final.push(e)
+				})
+			})
+			Array.prototype.byCount= function(){
+				var itm, a= [], L= this.length, o= {};
+				for(var i= 0; i<L; i++){
+					itm= this[i];
+					if(!itm) continue;
+					if(o[itm]== undefined) o[itm]= 1;
+					else ++o[itm];
+				}
+				for(var p in o) a[a.length]= p;
+				return a.sort(function(a, b){
+					return o[b]-o[a];
+				});
+			}
+			final = final.byCount().slice(0,5)
+			ans = ans.filter(function(element) {
+				return final.includes(element.ID)
+			})
+			if(ans) temp=true;
+			else temp=false;
+			console.log(ans)
+			res.render('front', {Popular: ans, PopularResult: temp});
+		})
+		
+	})
+})
+
+app.get('/allmuseums',function(req,res){
 	db.all('SELECT * FROM museums', function(err, ans) {
 		if (ans) temp=true
 		else temp=false
@@ -67,7 +105,7 @@ app.get('/like/:name/:id',function(req,res) {
 	username = req.params.name
 	cid = req.params.id
 	db.all('SELECT liked from users WHERE username="'+username+'"', function(err, ans) {
-		if(ans[0].liked.length==0) {
+		if(ans[0].liked==null) {
 			temp = []
 			temp.push(cid)
 		} else {
@@ -77,7 +115,7 @@ app.get('/like/:name/:id',function(req,res) {
 		temp = temp.filter(function(item, pos) {
 			return temp.indexOf(item) == pos;
 		})
-		db.all('UPDATE users SET liked="'+temp.join(".")+'"')
+		db.all('UPDATE users SET liked="'+temp.join(".")+'" WHERE username="'+username+'"')
 		res.send({val: true})
 	})
 });
