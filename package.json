@@ -1,0 +1,27 @@
+{
+  "name": "culturocity",
+  "version": "1.0.0",
+  "description": "C4Q Hackathon",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaellichen/Culturocity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaellichen/Culturocity/issues"
+  },
+  "homepage": "https://github.com/rafaellichen/Culturocity#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "js-md5": "^0.7.3",
+    "pug": "^2.0.0-rc.4",
+    "sqlite3": "^3.1.13"
+  }
+}

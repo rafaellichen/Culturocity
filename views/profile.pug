@@ -10,9 +10,14 @@
     </head>
     <body>
         include navbar.pug
-        <h1>Sign Up</h1>
-        include usrpwd.pug
-        <button onClick='signup()'; class="btn btn-default">Submit</button>
+        <h1>Profile</h1>
+        <div class="container">
+            <div class="flex-row row">
+                if ProfileResult
+                    for val in final
+                        include card.pug
+            </div>
+        </div>
         script
             include script.js
     </body>

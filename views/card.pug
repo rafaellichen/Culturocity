@@ -47,10 +47,34 @@
                         p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
             </div>
-            p <span><img class="icon" src="https://cl.ly/pwiL/phone.png"/></span> #{val.TEL}
-            p <span><img class="icon" src="https://cl.ly/pwfc/address.png"/></span> #{val.ADRESS1} #{val.ZIP}
+            <div style="width: 100%">
+                <div style="width: 35px; float: left;">
+                    <img class="icon" src="https://cl.ly/pwiL/phone.png"/>
+                </div>
+                <div style="margin-left: 49px;">
+                    if val.TEL != ""
+                        p #{val.TEL}
+                    else
+                        p (123) 456-7890
+                </div>
+            </div>
+            <div style="width: 100%; margin-top: 10px; margin-bottom: 22px;">
+                <div style="width: 35px; float: left;">
+                    <img class="icon" src="https://cl.ly/pwfc/address.png"/>
+                </div>
+                <div style="margin-left: 49px;">
+                    if val.ADRESS1 != ""
+                        p #{val.ADRESS1} #{val.ZIP}
+                    else
+                        p Lorem ipsum dolor sit amet 12345
+                </div>
+            </div>
+            div(style="margin-top: auto; margin-bottom: 11px;")
             a(href=val.URL target="#blank" class="btn btn-primary") Website
-            button(class="btn btn-success button-top-2px") Like
+            if val.liked
+                button(value=val.ID onClick="unlike(this)" class="btn btn-danger button-top-5px") Unlike
+            else    
+                button(value=val.ID onClick="like(this)" class="btn btn-success button-top-5px") Like
         </div>
     </div>
 </div>

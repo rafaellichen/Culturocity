@@ -42,7 +42,7 @@ app.get('/signup/:username/:password', function(req,res) {
 		if(duplicate) {
 			res.send({Message: "Username Already Exist", val: false})
 		} else {
-			res.send({Message: "Registration Successful", val: true})
+			res.send({Message: "Registration Successful", username: username, val: true})
 		}
 	})
 });
@@ -52,19 +52,72 @@ app.get('/login/:username/:password', function(req,res) {
 	password = req.params.password
 	const sql = "SELECT username,password_digest FROM users WHERE username=?"
   	db.all(sql.replace("?",'"'+username+'"'),function(err, data) {
-		if(err) {
-			console.log("ERROR!")
-		} else {
-			if(data.length) {
-				const str2md5 = md5(password)
-				if(str2md5===data[0].password_digest) {
-					res.send({message: "LogIn Successful", username: data[0].username, password: data[0].password_digest.slice(0,11), val: true})
-				}
-			} else {
-				res.send({message: "Username or Password is incorrect", val: false})
+		if(data.length) {
+			const str2md5 = md5(password)
+			if(str2md5===data[0].password_digest) {
+				res.send({message: "LogIn Successful", username: data[0].username, val: true})
 			}
-			console.log("DONE!")
+		} else {
+			res.send({message: "Username or Password is incorrect", val: false})
 		}
+  	});
+});
+
+app.get('/like/:name/:id',function(req,res) {
+	username = req.params.name
+	cid = req.params.id
+	db.all('SELECT liked from users WHERE username="'+username+'"', function(err, ans) {
+		if(ans[0].liked.length==0) {
+			temp = []
+			temp.push(cid)
+		} else {
+			temp = ans[0].liked.split(".")
+			temp.push(cid)
+		}
+		temp = temp.filter(function(item, pos) {
+			return temp.indexOf(item) == pos;
+		})
+		db.all('UPDATE users SET liked="'+temp.join(".")+'"')
+		res.send({val: true})
+	})
+});
+
+app.get('/liked/:name',function(req,res) {
+	username = req.params.name
+	db.all('SELECT liked from users WHERE username="'+username+'"', function(err, ans) {
+		temp = ans[0].liked.split(".")
+		res.send({temp})
+	})
+})
+
+app.get('/unlike/:name/:id',function(req,res) {
+	username = req.params.name
+	cid = req.params.id
+	db.all('SELECT liked from users WHERE username="'+username+'"', function(err, ans) {
+		temp = ans[0].liked.split(".")
+		temp = temp.filter(function(element) {
+			return element != cid
+		})
+		db.all('UPDATE users SET liked="'+temp.join(".")+'"')
+		res.send({val: true})
+	})
+});
+
+app.get('/profile/:name',function(req,res) {
+	username = req.params.name
+	const sql = "SELECT * FROM users WHERE username=?"
+  	db.all(sql.replace("?",'"'+username+'"'),function(err, data) {
+		liked = data[0].liked.split(".")
+		db.all('SELECT * FROM museums', function(err, ans) {
+			final = []
+			ans.forEach(function(element) {
+				element["liked"]=1
+				if(liked.includes(element.ID)) final.push(element)
+			})
+			if (ans.length) temp=true
+			else temp=false
+			res.render('profile', {data: final, ProfileResult: temp})
+		})
   	});
 });
 
