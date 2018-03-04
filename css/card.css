@@ -10,6 +10,7 @@
 .thumbnail {
 	display: flex;
 }
+
 .flex-row .thumbnail,
 .flex-row .caption {
 	flex-direction: column;

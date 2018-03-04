@@ -6,7 +6,6 @@ const md5 = require('js-md5');
 const db = new sqlite3.Database("culturocity.db")
 
 app.set('view engine', 'pug')
-app.use(express.static(__dirname + '/views'));
 
 app.get('/',function(req,res){
 	db.all('SELECT * FROM museums', function(err, ans) {
