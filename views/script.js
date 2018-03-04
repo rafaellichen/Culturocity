@@ -92,8 +92,5 @@ document.addEventListener("DOMContentLoaded", function() {
         '<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>\
         <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>'
     }
-});
-
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
+    document.querySelectorAll('[data-toggle="popover"]').popover()
 });
